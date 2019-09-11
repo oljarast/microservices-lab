@@ -15,13 +15,13 @@ Aim of this workshop is to introduce main concepts of microservices and provide 
 1. [Introduction to microservices](#introduction-to-microservices)
 2. [Introduction to GameOn](#introduction-to-gameon)
 3. [Practical 1](#practical-1)
-    a. [Creating a room](#creating-a-room)
-    b. [Pushing your room to IBM Cloud](#pushing-your-room-to-ibm-cloud)
-    c. [Registering your room with GameOn](#registering-your-room-with-gameon)
+    1. [Creating a room](#creating-a-room)
+    1. [Pushing your room to IBM Cloud](#pushing-your-room-to-ibm-cloud)
+    1. [Registering your room with GameOn](#registering-your-room-with-gameon)
 4. [What's next?](#whats-next)
-5. [Practical](#practical-2)
-    a. [Creating a Weather Service](#creating-a-weather-service)
-    b. [Integrating your Weather service with your room](#integrating-your-weather-service-with-your-room)
+5. [Practical 2](#practical-2)
+    1. [Creating a Weather Service](#creating-a-weather-service)
+    1. [Integrating your Weather service with your room](#integrating-your-weather-service-with-your-room)
 
 
 #### Source material for these instructions:
@@ -161,92 +161,83 @@ Lets move on and deploy the room into a cloud environment so we can have a publi
 
  - Sign up for IBM Cloud.
     Sign up for a free, trial account here https://cloud.ibm.com/registration
- - Install [cloud foundry](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html)
+ - Install [cloud foundry command line](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html)
     On mac with homebrew:
     ```bash
     brew install cloudfoundry/tap/cf-cli
     ```
 
-#### Deploy your room in IBM cloud
+#### Create a space in IBM Cloud UK
 
-Log into IBM Cloud from your command line:
+1. Log into [IBM Cloud](https://cloud.ibm.com/login)
+1. Click `Manage` in the top menu bar and select `Account`
+1. In the left-hand side select `Account resources` and choose `Cloud Foundry Orgs`
+1. Select your organisation (there should be only one)
+1. Click `Add a space`
+1. Select the region `United Kingdom`
+1. Enter `womencourage` as the name
+1. Click `Save`
 
-Create an org in IBM cloud
+#### Deploy your room in IBM Cloud
 
-Create a space in IBM cloud in uk geo
+1. Log into IBM Cloud from your command line:
 
-`cf login`
+    ```bash
+    cf login -a https://api.eu-gb.bluemix.net -s womencourage
+    ```
+2. Provide your email and password when asked
 
-provide your email and password when asked
+3. Navigate to the directory with your room in and build the app:
+    ```bash
+    cd sample-room-java
+    mvn install
+    ```
+4. Push the built app to IBM Cloud: (replace app-name with a unique name, e.g. olja-rast-room)
 
-Check your API endpoint is eu-gb
+    ```bash
+    cf push <app-name> -p target/gameon-room-java.zip
+    ```
 
-`cf api https://api.eu-gb.bluemix.net`
+The `gameon-room-java.zip` file includes all the code for your directory and the previous command pushes to your IBM Cloud into the space `womencourage`.
 
-Run the command that will take the files that make up your room from your local directory, sip it up and upload it to your space on IBM cloud
+#### See your app running in IBM Cloud
 
-`cf push my-test-room -p target/gameon-room-java.zip`
+Go to IBM Cloud in your browser and select `IBM Cloud` in the top left to return to your Dashboard.
 
-Go to your dashboard in IBM Cloud to see your room being started
+In the `Resource summary` panel select `Cloud Foundry apps` and click on `<app-name>.mybluemix.net`.
 
-In your dashboard, under Resource summary, click Cloud Foundry Apps
+The `Overview` page for your application should show a green circle and say "Running".
 
-Click on my-test-room
+Click `Visit App URL` to view your running room.
 
-The Overview page for your test room should open and you can see that your room is running.
+There are two endpoints:
+ - WebSocket Endpoint
+ - Health Check (REST)
 
-### Registering your room with IBM Cloud
+Note these down for later.
 
-Copy the
+### Registering your room with GameOn
 
+1. Go to https://gameontext.org/#/ to register your room
+2. Click `Enter` and then authenticate with one of the services where you already have an account: Twitter, Google, Facebook or GitHub
+3. Once you are authenticated, click the icon in the top right to `Edit registered rooms`
+4. Provide a full name for your room
+4. Provide a short nickname for your room (with no spaces)
+5. Provide a description for your room
+6. Scroll down to `Connection Details`
+7. Enter the Health Check URL into the `Health endpoint` box
+    e.g. `https://<app-name>.mybluemix.net/health`
+8. Enter the WebSockect Endpoint into the `WebSockect endpoint` box
+    e.g. `ws://<app-name>.eu-gb.mybluemix.net/room`
+9. Click `Register`
+10. Visit the Game-on interactive map and see if you can see your room https://gameontext.org/interactivemap/
 
-Register your room in the Game on map
+#### Visit your room in GameOn
 
-Go to https://gameontext.org/#/ to register your room to the map
-
-Enter and then authenticate with one of the other services where you already have an account: twitter, google, facebook or GitHub
-
-Once you are authenticated, you will be taken to The First Room
-
-You are given some basic commands:
-
-    Commands start with '/'.
-    Use /help to list all available commands. The list will change from room to room.
-    Use /exits to list all available exits.
-    Use /sos to return to First Room if you're stuck.
-    Rooms might try to fool you, but these three commands will always work.
-
-CLick the map icon in top right corner to add your room.
-
-In the Room management section, register your room that is now running in IBM Cloud.
-
-Make sure Register a new room is selected from the Select a room drop-down.
-
-Provide a short nickname for your room - important
-
-Provide a descriptive title for your room - important
-
-Paste in the WebSocket endpoint
-
-Visit your deployed application in IBM Cloud
-
-Change the url for your service to http - not https
-
-http://my-test-room.eu-gb.mybluemix.net/
-
-Copy the WebSocket address
-
-For example: ws://my-test-room.eu-gb.mybluemix.net/room
-
-Paste in the health endpoint
-
-Do we want them to describe the doors at this point?
-
-Click Register.
-
-Visit the Game-on interactive map and see if you can see your room https://gameontext.org/interactivemap/
-
-Go back to the your room interface here and see if you can teleport into other rooms that others in the workshop have created.
+In the game use the following commands to visit your room:
+1. `/sos`
+2. `/listmyrooms`
+3. `/teleport <roomid>` using the roomid returned from the previous command
 
 ## What's Next?
 
@@ -256,76 +247,75 @@ Slide session
 
 We want to add a fun element to your room.
 
-Connect a to a weather service from your room and code in a response when a `/temp` command is given that will return a temperature.
+Connect to a Weather Service in IBM Cloud from your room so that when someone types `/temp` in your room it will return a temperature.
 
 ### Creating a Weather Service
 
+<!-- TODO -->
+
 ### Integrating your Weather service with your room
 
- What do we need once service is up
-<!-- The below should be there already!! Kate -->
-<!-- - Edit the code for your room locally on your laptop:
-  a. Add security? to pom xml?
-    <feature>jaxrs-2.1</feature>
-    <feature>transportSecurity-1.0</feature>
-    <feature>mpHealth-1.0</feature>
+First add a new command to your room.
 
-    also
-    <sslDefault sslRef="restSSLSettings" />
+Edit `src/main/java/org/gameon/sample/RoomImplementation.java` to add another element to the switch statement in the `handleMessage` function. Add it just after `case room` but before the `default` one.
+```java
+case "/temp":
+    endpoint.sendMessage(session,
+            Message.createBroadcastEvent(getTemperature()));
 
-   <sslOptions id="restSSLOptions" sslRef="restSSLSettings" />
+    break;
+```
 
-   <ssl id="restSSLSettings"
-       keyStoreRef="restKeyStore"
-       sslProtocol="TLSv1.2" />
+Second add some code to call the Weather Service.
 
-   <keyStore id="restKeyStore"
-             location="resources/security/clientkey.jks"
-             type="JKS"
-             password="password"/>
-where? -->
+Add the following function to `src/main/java/org/gameon/sample/RoomImplementation.java`. Update the `<username>` and `<password>` to be those of your Weather Service credentials and the `<host>` to match the Weather Service credentials as well.
 
-- Edit src/main/java/org/gameon/sample/RoomImplementation.java to add another element to the switch statement in the handleMessage, just after 'case room' but before the default one.
-  ```java
-  case "/temperature":
-      endpoint.sendMessage(session,
-              Message.createBroadcastEvent(getTemperature()));
+```java
+public String getTemperature() {
 
-      break;
-  ```
-- Add the following function to src/main/java/org/gameon/sample/RoomImplementation.java Update the username and password to be those of your Weather credentials and the host to match the weather credentials as well
-    ```java
-    public String getTemperature() {
+    String username = "<username>";
+    String password = "<password>";
+    String authorizationHeaderName = "Authorization";
+    String authorizationHeaderValue = "Basic " +
+        javax.xml.bind.DatatypeConverter.printBase64Binary((username + ":" + password).getBytes());
+    
+    String location = "30339%3A4%3AUS";
+    String weatherAPIUrl = "https://<host>/api/weather/v1/location/" + location + "/observations.json?language=en-US";
 
-        String username = "<username>";
-        String password = "<password>";
-        String authorizationHeaderName = "Authorization";
-        String authorizationHeaderValue = "Basic " +
-            javax.xml.bind.DatatypeConverter.printBase64Binary((username + ":" + password).getBytes());
-        
-        String location = "30339%3A4%3AUS";
-        String weatherAPIUrl = "https://<host>/api/weather/v1/location/" + location + "/observations.json?language=en-US";
-
-        Client client = ClientBuilder.newClient();
-        Response httpResponse = client.target(weatherAPIUrl).path("").request(MediaType.APPLICATION_JSON).header(authorizationHeaderName, authorizationHeaderValue).get();
-        if (httpResponse.getStatus() != 200) {
-            return "Unexpected HTTP Response: " + httpResponse.getStatus();
-        }
-        String responseString = httpResponse.readEntity(String.class);
-        JsonReader jsonReader = Json.createReader(new StringReader(responseString));
-        JsonObject responseObject = jsonReader.readObject();
-        JsonObject observation = responseObject.getJsonObject("observation");
-        int temp = observation.getInt("temp");
-        return temp.toString();
+    Client client = ClientBuilder.newClient();
+    Response httpResponse = client.target(weatherAPIUrl).path("").request(MediaType.APPLICATION_JSON).header(authorizationHeaderName, authorizationHeaderValue).get();
+    if (httpResponse.getStatus() != 200) {
+        return "Unexpected HTTP Response: " + httpResponse.getStatus();
     }
-    ```
+    String responseString = httpResponse.readEntity(String.class);
+    JsonReader jsonReader = Json.createReader(new StringReader(responseString));
+    JsonObject responseObject = jsonReader.readObject();
+    JsonObject observation = responseObject.getJsonObject("observation");
+    int temp = observation.getInt("temp");
+    return temp.toString();
+}
+```
 
-- Add this into `src/main/java/org/gameon/sample/RoomImplementation.java` in the postConstruct method similar to ping
+Finally we will update the room so that it will tell people about the new command.
+
+Add the following into `src/main/java/org/gameon/sample/RoomImplementation.java` in the `postConstruct` method similar to ping.
 
     ```java
-    roomDescription.addCommand("/temperature", "Get temperature");
+    roomDescription.addCommand("/ping", "Does this work?");
+    roomDescription.addCommand("/temp", "Get temperature");
     ```
 
+#### Pushing a new version of the room
 
+Rebuild your room and push up the new version:
+
+```bash
+mvn install
+cf push <app-name> -p target/gameon-room-java.zip
+```
+
+Go to GameOn and see if you can use the new `temp` command.
+
+## Extension
 
 Connect to a translation service that could allow the user to read the replies in their own language.
