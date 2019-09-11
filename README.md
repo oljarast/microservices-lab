@@ -300,10 +300,10 @@ Finally we will update the room so that it will tell people about the new comman
 
 Add the following into `src/main/java/org/gameon/sample/RoomImplementation.java` in the `postConstruct` method similar to ping.
 
-    ```java
-    roomDescription.addCommand("/ping", "Does this work?");
-    roomDescription.addCommand("/temp", "Get temperature");
-    ```
+```java
+roomDescription.addCommand("/ping", "Does this work?");
+roomDescription.addCommand("/temp", "Get temperature");
+```
 
 #### Pushing a new version of the room
 
