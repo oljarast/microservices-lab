@@ -251,7 +251,13 @@ Connect to a Weather Service in IBM Cloud from your room so that when someone ty
 
 ### Creating a Weather Service
 
-<!-- TODO -->
+1. Go to IBM Cloud on your browser and click on `Catalog` from the top of the page.
+2. Select `Internet of Things` from the catagory list and click on `Weather Company Data`. 
+3. Select the region `London` and choose the space you created earlier in this [step](#Create-a-space-in-IBM-Cloud-UK).
+4. Click on `Create`.
+5. Select `Service credentials` from the left menu and create a new credential. Click on `New credential` button and then `Add` on the pop up window. 
+6. Click `View credentials` on the `Service credentials` you just created. 
+7. Take a note of `user`, `password` and `host` for later on.
 
 ### Integrating your Weather service with your room
 
@@ -268,7 +274,7 @@ case "/temp":
 
 Second add some code to call the Weather Service.
 
-Add the following function to `src/main/java/org/gameon/sample/RoomImplementation.java`. Update the `<username>` and `<password>` to be those of your Weather Service credentials and the `<host>` to match the Weather Service credentials as well.
+Add the following function to `src/main/java/org/gameon/sample/RoomImplementation.java`. Update the `<username>`, `<password>` and `<host>` to be those of your Weather Service credentials.
 
 ```java
 public String getTemperature() {
