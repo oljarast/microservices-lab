@@ -260,7 +260,7 @@ Connect to a Weather Service in IBM Cloud from your room so that when someone ty
 5. Click on `Create`.
 6. Select `Service credentials` from the left menu and create a new credential. Click on `New credential` button and then `Add` on the pop up window. 
 7. Click `View credentials` on the `Service credentials` you just created. 
-8. Take a note of `user`, `password` and `host` for later on.
+8. Take a note of `username`, `password` and `host` for later on.
 
 ### Integrating your Weather service with your room
 
