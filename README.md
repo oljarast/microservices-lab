@@ -281,12 +281,14 @@ public String getTemperature() {
 
     String username = "<username>";
     String password = "<password>";
+    String host = "<host>";
+    
     String authorizationHeaderName = "Authorization";
     String authorizationHeaderValue = "Basic " +
         javax.xml.bind.DatatypeConverter.printBase64Binary((username + ":" + password).getBytes());
     
     String location = "30339%3A4%3AUS";
-    String weatherAPIUrl = "https://<host>/api/weather/v1/location/" + location + "/observations.json?language=en-US";
+    String weatherAPIUrl = "https://" + host + "/api/weather/v1/location/" + location + "/observations.json?language=en-US";
 
     Client client = ClientBuilder.newClient();
     Response httpResponse = client.target(weatherAPIUrl).path("").request(MediaType.APPLICATION_JSON).header(authorizationHeaderName, authorizationHeaderValue).get();
