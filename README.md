@@ -321,7 +321,7 @@ mvn install
 cf push <app-name> -p target/gameon-room-java.zip
 ```
 
-Go to GameOn and see if you can use the new `temp` command.
+Go to GameOn and see if you can use the new `/temp` command.
 
 ## Extension
 
