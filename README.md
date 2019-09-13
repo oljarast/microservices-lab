@@ -274,7 +274,7 @@ case "/temp":
 
 Second add some code to call the Weather Service.
 
-Add the following function to `src/main/java/org/gameontext/sample/RoomImplementation.java`. Update the `<username>`, `<password>` and `<host>` to be those of your Weather Service credentials.
+Add the following function to `src/main/java/org/gameontext/sample/RoomImplementation.java`. Update the `<username>`, `<password>` and `<host>` in the new function to be those of your Weather Service credentials.
 
 ```java
 public String getTemperature() {
