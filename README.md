@@ -279,7 +279,7 @@ Edit `src/main/java/org/gameontext/sample/RoomImplementation.java` to add anothe
 ```java
 case "/temp":
     endpoint.sendMessage(session,
-            Message.createBroadcastEvent(getTemperature()));
+            Message.createBroadcastEvent("Temperature sent to " + username, userId, getTemperature()));
 
     break;
 ```
