@@ -72,11 +72,11 @@ You will need:
 #### Cloning the project
 
 1. Go to this repository in GitHub https://github.com/oljarast/sample-room-java
-    a. Using ssh - instructions for setting up ssh
+    1. Using ssh - instructions for setting up ssh
     ```bash
     git clone git@github.com:oljarast/sample-room-java.git
     ```
-    b. Using https - instructions
+    1. Using https - instructions
     ```bash
     git clone https://github.com/oljarast/sample-room-java.git
     ```
