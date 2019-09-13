@@ -57,9 +57,11 @@ You will need:
 1. Install [Git](https://git-scm.com/downloads)
 
 2. Install [Apache Maven](https://maven.apache.org/install.html)
-  Windows
-  Mac
-  Linux
+
+    For Mac users use the following command:
+    ```bash
+    brew install mvn
+    ```
 
 3. Install [JDK](https://www.oracle.com/java/technologies/jdk8-downloads.html)
   Check java -version
@@ -138,7 +140,7 @@ In your favourite editor, open the local directory for the `sample-room-java` th
 Make some changes to the strings here, maybe rename the room to include your name and add a different description. Save the changes and go back to your terminal, run:
 
 ```bash
-maven install
+mvn install
 ```
 
 This will rebuild your room with the changes you made in the RoomDescription file.
