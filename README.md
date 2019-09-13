@@ -66,9 +66,6 @@ You will need:
 3. Install [JDK](https://www.oracle.com/java/technologies/jdk8-downloads.html)
   Check java -version
 
-<!-- Kate: what is this ommand for? -->
-<!-- From your home or c: directory -->
-
 #### Cloning the project
 
 1. Go to this repository in GitHub https://github.com/oljarast/sample-room-java
@@ -266,7 +263,7 @@ Connect to a Weather Service in IBM Cloud from your room so that when someone ty
 
 First add a new command to your room.
 
-Edit `src/main/java/org/gameon/sample/RoomImplementation.java` to add another element to the switch statement in the `handleMessage` function. Add it just after `case room` but before the `default` one.
+Edit `src/main/java/org/gameontext/sample/RoomImplementation.java` to add another element to the switch statement in the `handleMessage` function. Add it just after `case room` but before the `default` one.
 ```java
 case "/temp":
     endpoint.sendMessage(session,
@@ -277,7 +274,7 @@ case "/temp":
 
 Second add some code to call the Weather Service.
 
-Add the following function to `src/main/java/org/gameon/sample/RoomImplementation.java`. Update the `<username>`, `<password>` and `<host>` to be those of your Weather Service credentials.
+Add the following function to `src/main/java/org/gameontext/sample/RoomImplementation.java`. Update the `<username>`, `<password>` and `<host>` to be those of your Weather Service credentials.
 
 ```java
 public String getTemperature() {
@@ -307,7 +304,7 @@ public String getTemperature() {
 
 Finally we will update the room so that it will tell people about the new command.
 
-Add the following into `src/main/java/org/gameon/sample/RoomImplementation.java` in the `postConstruct` method similar to ping.
+Add the following into `src/main/java/org/gameontext/sample/RoomImplementation.java` in the `postConstruct` method similar to ping.
 
 ```java
 roomDescription.addCommand("/ping", "Does this work?");
