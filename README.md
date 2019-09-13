@@ -12,14 +12,12 @@ Aim of this workshop is to introduce main concepts of microservices and provide 
  - Bethany Simpson
 
 ## Contents:
-1. [Introduction to microservices](#introduction-to-microservices)
-2. [Introduction to GameOn](#introduction-to-gameon)
-3. [Practical 1](#practical-1)
+1. [Introduction to GameOn](#introduction-to-gameon)
+2. [Practical 1](#practical-1)
     1. [Creating a room](#creating-a-room)
     1. [Pushing your room to IBM Cloud](#pushing-your-room-to-ibm-cloud)
     1. [Registering your room with GameOn](#registering-your-room-with-gameon)
-4. [What's next?](#whats-next)
-5. [Practical 2](#practical-2)
+3. [Practical 2](#practical-2)
     1. [Creating a Weather Service](#creating-a-weather-service)
     1. [Integrating your Weather service with your room](#integrating-your-weather-service-with-your-room)
 
@@ -32,13 +30,15 @@ Aim of this workshop is to introduce main concepts of microservices and provide 
 
  - [Starting repo for this workshop](https://github.com/oljarast/sample-room-java) (is a fork of the [GameOn sample-room-java repo](https://github.com/gameontext/sample-room-java))
 
-
-
-## Introduction to microservices
 ## Introduction to GameOn
 
+[GameOn!](https://gameontext.org/#/) is a throwback text-based adventure built to help you explore microservice architectures and related concepts.
+
+It can be difficult to get a full picture of what a microservices application should look like, or to understand why it is said that microservice architectures both remove and introduce complexity at the same time.
+
+GameOn helps you to get hands-on with microservices and start to explore how they work for yourself.
+
 GameOn was created and is maintained by [these IBMers](https://github.com/orgs/gameontext/people).
-    [Presentation for 1. and 2.]()
 
 ## Practical 1
 
@@ -63,17 +63,16 @@ You will need:
     brew install mvn
     ```
 
-3. Install [JDK](https://www.oracle.com/java/technologies/jdk8-downloads.html)
-  Check java -version
+3. Install a [JDK](https://www.oracle.com/java/technologies/jdk8-downloads.html). Check `java -version` to make sure you are using version 8.
 
 #### Cloning the project
 
 1. Go to this repository in GitHub https://github.com/oljarast/sample-room-java
-    1. Using ssh - instructions for setting up ssh
+    - Using ssh - [instructions for setting up ssh](https://help.github.com/en/articles/connecting-to-github-with-ssh)
     ```bash
     git clone git@github.com:oljarast/sample-room-java.git
     ```
-    1. Using https - instructions
+    - Using https (no additonal setup required)
     ```bash
     git clone https://github.com/oljarast/sample-room-java.git
     ```
@@ -98,8 +97,6 @@ You will need:
     [INFO] ------------------------------------------------------------------------
     ```
 
-    If not, call for help
-
 3. Stand up the server locally to see your room in localhost:
     ```bash
     mvn liberty:run-server
@@ -110,29 +107,35 @@ You will need:
     [INFO] [AUDIT   ] CWWKF0011I: The server gojava-room is ready to run a smarter planet.
     ```
 
-4. Test quickly that the room is healthy by going to http://localhost:9080/health.
+4. Test that the room is healthy by going to http://localhost:9080/health.
     You should see that your room is available.
 
 5. Go to: http://localhost:9080
     You should see a simple interface for your room.
 
-6. Test your room. Next to the field `TheGeneratedIdOfThisRoom` click the `Connect` button.
+6. Next to the field `TheGeneratedIdOfThisRoom` click the `Connect` button.
     You should see the json file returned in the activity box:
     ```
     Connection established.
     ```
+    This means your room is working.
 
 7. Click `roomHello`. You can see the reply in JSON format with the room information.
 
 8. Stop the sever. In the terminal where you ran `mvn liberty:run-server`, do `ctrl+c` to stop the process
 
->Show output
+    Once the server has stopped it will print out the following:
+    ```bash
+    [INFO] [AUDIT   ] CWWKE0036I: The server gojava-room stopped after 14.65 seconds.
+    ```
 
 #### Updating your room
 
-Edit the message that is returned when you run the roomHello command
+Edit the message that is returned when you run the `roomHello` command.
 
-In your favourite editor, open the local directory for the `sample-room-java` that you cloned. Go to the `/src/main/java/org/gameontext/sample` directory and open the `RoomDescription.java` file. Lines 40-42 have the code that contain the name, fullName and description strings that you just saw in your room page when you clicked roomHello.
+In your favourite editor, open the local directory for the `sample-room-java` that you cloned.
+
+Open the `src/main/java/org/gameontext/sample/RoomDescription.java` file. Lines 40-42 have the code that contain the `name`, `fullName` and `description` strings that you just saw in your room page when you clicked roomHello.
 
 Make some changes to the strings here, maybe rename the room to include your name and add a different description. Save the changes and go back to your terminal, run:
 
@@ -148,19 +151,21 @@ Now restart the server by running:
 mvn liberty:run-server
 ```
 
-Go to your room page, http://localhost:9080, click connect and then click roomHello.
+Go to your room page, http://localhost:9080, click `connect` and then click `roomHello`.
 
 You should see a different response returned. It should include the changes you just made.
 
-Lets move on and deploy the room into a cloud environment so we can have a publicly accessible end point that other services like the map can see online.
-
 ### Pushing your room to IBM Cloud
+
+Lets deploy the room into a cloud environment so we can have a publicly accessible endpoint that GameOn can talk to.
 
 #### Pre-reqs
 
  - Sign up for IBM Cloud.
+ 
     Sign up for a free, trial account here https://cloud.ibm.com/registration
  - Install [cloud foundry command line](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html)
+ 
     On mac with homebrew:
     ```bash
     brew install cloudfoundry/tap/cf-cli
@@ -225,8 +230,10 @@ Note these down for later.
 5. Provide a description for your room
 6. Scroll down to `Connection Details`
 7. Enter the Health Check URL into the `Health endpoint` box
+
     e.g. `https://<app-name>.mybluemix.net/health`
 8. Enter the WebSockect Endpoint into the `WebSockect endpoint` box
+
     e.g. `ws://<app-name>.eu-gb.mybluemix.net/room`
 9. Click `Register`
 10. Visit the Game-on interactive map and see if you can see your room https://gameontext.org/interactivemap/
@@ -238,15 +245,11 @@ In the game use the following commands to visit your room:
 2. `/listmyrooms`
 3. `/teleport <roomid>` using the roomid returned from the previous command
 
-## What's Next?
-
-Slide session
-
 ## Practical 2
 
-We want to add a fun element to your room.
+Now that you have built a basic room we can start extending. Many microservice applications make requests to other services. We also want to add a fun element to your room.
 
-Connect to a Weather Service in IBM Cloud from your room so that when someone types `/temp` in your room it will return a temperature.
+We will update the room to connect to a Weather Service in IBM Cloud, so that when someone types `/temp` in your room it will return a temperature.
 
 ### Creating a Weather Service
 
@@ -261,7 +264,7 @@ Connect to a Weather Service in IBM Cloud from your room so that when someone ty
 
 ### Integrating your Weather service with your room
 
-First add a new command to your room.
+To add a new command we need to update the `RoomImplementation` class.
 
 Edit `src/main/java/org/gameontext/sample/RoomImplementation.java` to add the following imports to the class:
 
@@ -284,7 +287,7 @@ case "/temp":
     break;
 ```
 
-Second add some code to call the Weather Service.
+Now we can add some code to call the Weather Service.
 
 Add the following function to `src/main/java/org/gameontext/sample/RoomImplementation.java`. Update the `<username>`, `<password>` and `<host>` in the new function to be those of your Weather Service credentials.
 
@@ -337,4 +340,4 @@ Go to GameOn and see if you can use the new `/temp` command.
 
 ## Extension
 
-Connect to a translation service that could allow the user to read the replies in their own language.
+The Weather Company service gives back lots of information, see if you can add another command that provides a different type of weather information. Alternatively you can make the GameOn players ask for the weather in a different way. For example, maybe you could get them to pick up a thermometer before they can get the temperature.
