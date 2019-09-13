@@ -263,6 +263,18 @@ Connect to a Weather Service in IBM Cloud from your room so that when someone ty
 
 First add a new command to your room.
 
+Edit `src/main/java/org/gameontext/sample/RoomImplementation.java` to add the following imports to the class:
+
+```java
+import java.io.StringReader;
+import javax.json.Json;
+import javax.json.JsonReader;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+```
+
 Edit `src/main/java/org/gameontext/sample/RoomImplementation.java` to add another element to the switch statement in the `processCommand` function. Add it just after `case "/ping"` but before the `default` one.
 ```java
 case "/temp":
@@ -300,7 +312,7 @@ public String getTemperature() {
     JsonObject responseObject = jsonReader.readObject();
     JsonObject observation = responseObject.getJsonObject("observation");
     int temp = observation.getInt("temp");
-    return temp.toString();
+    return Integer.toString(temp);
 }
 ```
 
