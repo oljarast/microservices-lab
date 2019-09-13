@@ -255,11 +255,12 @@ Connect to a Weather Service in IBM Cloud from your room so that when someone ty
 
 1. Go to IBM Cloud on your browser and click on `Catalog` from the top of the page.
 2. Select `Internet of Things` from the catagory list and click on `Weather Company Data`. 
-3. Select the region `London` and choose the space you created earlier in this [step](#Create-a-space-in-IBM-Cloud-UK).
-4. Click on `Create`.
-5. Select `Service credentials` from the left menu and create a new credential. Click on `New credential` button and then `Add` on the pop up window. 
-6. Click `View credentials` on the `Service credentials` you just created. 
-7. Take a note of `user`, `password` and `host` for later on.
+3. Select the region `London` 
+4. Scroll down and choose the space you created earlier in this [step](#Create-a-space-in-IBM-Cloud-UK).
+5. Click on `Create`.
+6. Select `Service credentials` from the left menu and create a new credential. Click on `New credential` button and then `Add` on the pop up window. 
+7. Click `View credentials` on the `Service credentials` you just created. 
+8. Take a note of `user`, `password` and `host` for later on.
 
 ### Integrating your Weather service with your room
 
