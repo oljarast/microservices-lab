@@ -306,10 +306,9 @@ public String getTemperature() {
 
 Finally we will update the room so that it will tell people about the new command.
 
-Add the following into `src/main/java/org/gameontext/sample/RoomImplementation.java` in the `postConstruct` method similar to ping.
+Add the following into `src/main/java/org/gameontext/sample/RoomImplementation.java` in the `postConstruct` method on the line after `roomDescription.addCommand("/ping", "Does this work?");`.
 
 ```java
-roomDescription.addCommand("/ping", "Does this work?");
 roomDescription.addCommand("/temp", "Get temperature");
 ```
 
