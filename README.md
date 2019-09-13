@@ -263,7 +263,7 @@ Connect to a Weather Service in IBM Cloud from your room so that when someone ty
 
 First add a new command to your room.
 
-Edit `src/main/java/org/gameontext/sample/RoomImplementation.java` to add another element to the switch statement in the `handleMessage` function. Add it just after `case room` but before the `default` one.
+Edit `src/main/java/org/gameontext/sample/RoomImplementation.java` to add another element to the switch statement in the `processCommand` function. Add it just after `case "/ping"` but before the `default` one.
 ```java
 case "/temp":
     endpoint.sendMessage(session,
