@@ -340,4 +340,27 @@ Go to GameOn and see if you can use the new `/temp` command.
 
 ## Extension
 
-The Weather Company service gives back lots of information, see if you can add another command that provides a different type of weather information. Alternatively you can make the GameOn players ask for the weather in a different way. For example, maybe you could get them to pick up a thermometer before they can get the temperature.
+The Weather Company service gives back lots of information, see if you can add another command that provides a different type of weather information. For example:
+
+```java
+String pressure_desc = obervation.getString(pressure_desc);
+int pressure_tend = observation.getInt("pressure_tend");
+int max_temp = observation.getInt("max_temp");
+int min_temp = observation.getInt("min_temp");
+int feels_like = observation.getInt("feels_like");
+int pressure = observation.getInt("pressure");
+```
+
+You can see full details of the return object in the [rest documentation](https://twcservice.mybluemix.net/rest-api/#/).
+
+Alternatively you can make the GameOn players ask for the weather in a different way. For example, maybe you could get them to pick up a thermometer before they can get the temperature. The GameOn book gives advice for [adding objects](https://book.gameontext.org/walkthroughs/addItemsToYourRoom.html).
+
+If you want to change the location that the data is for you can do the following:
+1. Find the latitude and longitude of the location you want
+
+    If using Google maps you can enter a location, right-click on the pin and select `What's here?` and it will show latitude and longitude.
+2. Create a String called `latLong`:
+    ```java
+    String latLong = "<latitude>/<longitude>";
+    ```
+3. Update the `String weatherAPIUrl` to equal `"https://" + host + "/api/weather/v1/geocode/" + latLong + "/observations.json?language=en-US"
