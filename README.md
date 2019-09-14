@@ -343,7 +343,7 @@ Go to GameOn and see if you can use the new `/temp` command.
 The Weather Company service gives back lots of information, see if you can add another command that provides a different type of weather information. For example:
 
 ```java
-String pressure_desc = obervation.getString(pressure_desc);
+String pressure_desc = obervation.getString("pressure_desc");
 int pressure_tend = observation.getInt("pressure_tend");
 int max_temp = observation.getInt("max_temp");
 int min_temp = observation.getInt("min_temp");
