@@ -163,7 +163,7 @@ Lets deploy the room into a cloud environment so we can have a publicly accessib
 
  - Sign up for IBM Cloud.
  
-    Sign up for a free, trial account here https://cloud.ibm.com/registration
+    Sign up for a free, trial account here https://cloud.ibm.com/registration?cm_mmc=womencourage
  - Install [cloud foundry command line](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html)
  
     On mac with homebrew:
