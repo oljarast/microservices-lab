@@ -201,7 +201,7 @@ Lets deploy the room into a cloud environment so we can have a publicly accessib
 4. Push the built app to IBM Cloud: (replace app-name with a unique name, e.g. olja-rast-room)
 
     ```bash
-    cf push <app-name> -p target/gameon-room-java.zip
+    cf push <app-name> -p target/gameon-room-java.zip -m 256M
     ```
 
 The `gameon-room-java.zip` file includes all the code for your directory and the previous command pushes to your IBM Cloud into the space `womencourage`.
@@ -335,7 +335,7 @@ Rebuild your room and push up the new version:
 
 ```bash
 mvn install
-cf push <app-name> -p target/gameon-room-java.zip
+cf push <app-name> -p target/gameon-room-java.zip -m 256M
 ```
 
 Go to GameOn and see if you can use the new `/temp` command.
