@@ -24,6 +24,8 @@ Aim of this workshop is to introduce main concepts of microservices and provide 
 
 #### Source material for these instructions:
 
+ - [Slides for workshop](https://ibm.box.com/s/xkz3e0x756yoezqfajzq8ofuku92rzmm)
+
  - [GameOn book](https://book.gameontext.org/)
 
  - [GameOn site](https://gameontext.org/#/login)
